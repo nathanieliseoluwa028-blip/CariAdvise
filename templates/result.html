@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Result - CariAdvise</title>
+<style>
+* { box-sizing: border-box; }
+body { font-family: Arial; background: #6C5CE7; margin: 0; padding: 15px; min-height: 100vh; }
+.card { background: white; max-width: 600px; margin: 0 auto; padding: 30px 20px; border-radius: 20px; text-align: center; }
+.big { font-size: 30px; color: #6C5CE7; font-weight: bold; margin: 10px 0; }
+.btn { display: inline-block; margin: 8px 5px; background: #6C5CE7; color: white; padding: 14px 22px; border-radius: 30px; text-decoration: none; font-weight: bold; font-size: 15px; }
+.score-row { font-size: 15px; padding: 6px 0; border-bottom: 1px solid #eee; }
+</style>
+</head>
+<body>
+<div class="card">
+<h1>🎉 Your Result!</h1>
+<p>Your #1 Career Match is:</p>
+<p class="big">{{ top1[0] }}</p>
+<p>Score: {{ top1[1] }}</p>
+<hr>
+<p>Your #2 Match is:</p>
+<p style="font-size:22px; font-weight:bold;">{{ top2[0] }}</p>
+<p>Score: {{ top2[1] }}</p>
+<hr>
+<p>All scores:</p>
+{% for item in scores %}
+<div class="score-row">{{ item[0] }} - <b>{{ item[1] }}</b></div>
+{% endfor %}
+<br>
+<a class="btn" href="/">← Back Home</a>
+<a class="btn" href="/quiz">Take Quiz Again</a>
+</div>
+</body>
+</html>
