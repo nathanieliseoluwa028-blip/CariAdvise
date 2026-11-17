@@ -4,11 +4,31 @@ import sqlite3, json
 app = Flask(__name__, template_folder='templates')
 
 CAREERS = {
-    "Software Developer": {"desc": "You love building things with logic and code.", "first_step": "Learn Python basics on freeCodeCamp and build a calculator app.", "emoji": "💻"},
-    "Data Analyst": {"desc": "You love finding patterns in numbers and facts.", "first_step": "Learn Excel + basic SQL, then make a chart from real data.", "emoji": "📊"},
-    "Creative Designer": {"desc": "You love colours, stories and making things look beautiful.", "first_step": "Learn Canva/Figma and redesign your favourite app homepage.", "emoji": "🎨"},
-    "Healthcare Professional": {"desc": "You love helping people and understanding how the body works.", "first_step": "Watch a first-aid course and volunteer at a school health drive.", "emoji": "🩺"},
-    "Business & Entrepreneur": {"desc": "You love leading, selling ideas and starting things.", "first_step": "Write a 1-page business plan for an idea you have and pitch it to a friend.", "emoji": "🚀"}
+    "Software Developer": {
+        "desc": "You love building things with logic and technology.",
+        "why": "Because you chose building games/apps, Maths/Computing, and solving puzzles alone.",
+        "first_step": "Start with Python on Codecademy or freeCodeCamp - build your first 'Hello World' app this week."
+    },
+    "Data Analyst": {
+        "desc": "You love finding patterns in numbers and data.",
+        "why": "Because you chose looking at stats, Maths/Statistics, and working with numbers.",
+        "first_step": "Start with Excel + Google Sheets, then learn Python and watch one beginner Data Analysis video."
+    },
+    "Creative Designer": {
+        "desc": "You love colours, stories and making things look beautiful.",
+        "why": "Because you chose drawing/editing videos, Art/Music, and working in a creative team.",
+        "first_step": "Download Canva or Figma and design one poster today - then try to copy your favourite Instagram design."
+    },
+    "Healthcare Professional": {
+        "desc": "You love helping people and caring for others.",
+        "why": "Because you chose helping friends feel better, Biology/Chemistry, and helping people.",
+        "first_step": "Start by watching one video on Human Biology and volunteering to help at school or in your community."
+    },
+    "Business & Entrepreneur": {
+        "desc": "You love leading, selling ideas and building a business.",
+        "why": "Because you chose selling/planning a small business, Economics/Business Studies, and leading others.",
+        "first_step": "Start by writing one small business idea in your notebook and watch one video on how to start a business in Nigeria."
+    }
 }
 
 QUESTIONS = [
@@ -103,7 +123,7 @@ def quiz():
         conn.execute("CREATE TABLE IF NOT EXISTS submissions (id INTEGER PRIMARY KEY AUTOINCREMENT, answers TEXT, result1 TEXT, result2 TEXT)")
         conn.execute("INSERT INTO submissions (answers, result1, result2) VALUES (?,?,?)", (json.dumps(answers), top1[0], top2[0]))
         conn.commit(); conn.close()
-        return render_template("result.html", top1=top1, top2=top2, info2=CAREERS[top2[0]], scores=ranked)
+        return render_template("result.html", top1=top1, top2=top2, scores=ranked, careers=CAREERS)
     return render_template("quiz.html", questions=QUESTIONS)
 
 if __name__ == "__main__":

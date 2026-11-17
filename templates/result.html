@@ -18,11 +18,16 @@ body { font-family: Arial; background: linear-gradient(135deg, #e9d5ff, #fbcfe8,
 <p>Your #1 Career Match is:</p>
 <p class="big">{{ top1[0] }}</p>
 <p>Score: {{ top1[1] }}</p>
+<p>{{ careers[top1[0]]['desc'] }}</p>
+<p><b>Why this fits you:</b> {{ careers[top1[0]]['why'] }}</p>
+<p><b>Your first step:</b> {{ careers[top1[0]]['first_step'] }}</p>
 <hr>
 <p>Your #2 Match is:</p>
 <p style="font-size:22px; font-weight:bold;">{{ top2[0] }}</p>
 <p>Score: {{ top2[1] }}</p>
-<hr>
+<p>{{ careers[top2[0]]['desc'] }}</p>
+<p><b>Why this fits you:</b> {{ careers[top2[0]]['why'] }}</p>
+<p><b>Your first step:</b> {{ careers[top2[0]]['first_step'] }}</p>
 <p>All scores:</p>
 {% for item in scores %}
 <div class="score-row">{{ item[0] }} - <b>{{ item[1] }}</b></div>
