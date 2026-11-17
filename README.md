@@ -5,7 +5,7 @@ CariAdvise helps students find their best career match by answering 10 simple qu
 It shows your Top 2 career matches with score, why it fits you, and your first learning step.
 
 Author: Nathaniel Isheoluwa
-Live App: [https://cariadvise.onrender.com]
+Live App: https://cariadvise.onrender.com
 
 ---
 
