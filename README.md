@@ -134,6 +134,23 @@ This file you are reading now.
 9. After any future change: Push to GitHub > Go to Render > Manual Deploy > Deploy latest commit.
 
 ---
+---
+
+## HOW SCORING WORKS
+
+1. The quiz has 10 questions.
+2. Each answer is linked to one career path.
+3. When you pick an answer, that career gets +1 point.
+4. After all 10 questions, all 5 careers have a total score out of 10.
+5. Careers are sorted from highest score to lowest score.
+6. The top 2 careers are shown on the result page with their score, why they fit you, and your first learning step.
+
+## HOW TIED SCORES ARE HANDLED
+
+If two careers have the same score, the tie is broken in this order:
+1. The career that got its points FIRST (earlier questions) ranks higher.
+2. If still tied, careers are listed in alphabetical order so the result is always the same and fair.
+3. Both tied careers can still appear in the Top 2, so you will never lose a match because of a tie.
 
 ## PROBLEMS WE FIXED
 
@@ -141,3 +158,4 @@ This file you are reading now.
 - Fixed double comma syntax error in render_template line in app.py
 - Added why and first_step to each career in CAREERS dict
 - Fixed result page to show Top 2, not just Top 1
+
