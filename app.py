@@ -129,6 +129,10 @@ def quiz():
         top1, top2, ranked = get_top_two(scores)
         conn = sqlite3.connect("cariadvise.db")
         conn.execute("CREATE TABLE IF NOT EXISTS submissions (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, answers TEXT, result1 TEXT, result2 TEXT)")
+        cols = [r[1] for r in conn.execute("PRAGMA table_info(submissions)")]
+        for col in ["name", "answers", "result1", "result2"]:
+            if col not in cols:
+                conn.execute(f"ALTER TABLE submissions ADD COLUMN {col} TEXT")
         name = session.get("name", "Guest")
         conn.execute("INSERT INTO submissions (name, answers, result1, result2) VALUES (?, ?, ?, ?)", (name, str(answers), str(top1), str(top2))) 
         conn.commit(); conn.close()
