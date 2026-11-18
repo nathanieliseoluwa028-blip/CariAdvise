@@ -1,7 +1,15 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session, redirect
+app = Flask(__name__)
+app.secret_key = "cariadvise-secret-123"
 import sqlite3, json
+@app.route("/start", methods=["GET", "POST"])
+def start():
+    if request.method == "POST":
+        session["name"] = request.form.get("name")
+        return redirect("/quiz")
+    return render_template("start.html")
 
-app = Flask(__name__, template_folder='templates')
+
 
 CAREERS = {
     "Software Developer": {
@@ -120,10 +128,11 @@ def quiz():
         scores = score_answers(answers)
         top1, top2, ranked = get_top_two(scores)
         conn = sqlite3.connect("cariadvise.db")
-        conn.execute("CREATE TABLE IF NOT EXISTS submissions (id INTEGER PRIMARY KEY AUTOINCREMENT, answers TEXT, result1 TEXT, result2 TEXT)")
-        conn.execute("INSERT INTO submissions (answers, result1, result2) VALUES (?,?,?)", (json.dumps(answers), top1[0], top2[0]))
+        conn.execute("CREATE TABLE IF NOT EXISTS submissions (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, answers TEXT, result1 TEXT, result2 TEXT)")
+        name = session.get("name", "Guest")
+        conn.execute("INSERT INTO submissions (name, answers, result1, result2) VALUES (?, ?, ?, ?)", (name, str(answers), str(top1), str(top2))) 
         conn.commit(); conn.close()
-        return render_template("result.html", top1=top1, top2=top2, scores=ranked, careers=CAREERS)
+        return render_template("result.html", top1=top1, top2=top2, scores=ranked, careers=CAREERS, name=name)
     return render_template("quiz.html", questions=QUESTIONS)
 
 if __name__ == "__main__":
