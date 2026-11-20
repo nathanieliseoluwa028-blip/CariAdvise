@@ -138,6 +138,15 @@ def quiz():
         conn.commit(); conn.close()
         return render_template("result.html", top1=top1, top2=top2, scores=ranked, careers=CAREERS, name=name)
     return render_template("quiz.html", questions=QUESTIONS)
+@app.route('/admin')
+def admin():
+    conn = sqlite3.connect("cariadvise.db")
+    conn.row_factory = sqlite3.Row
+    # Make sure table exists even if no one has done quiz yet
+    conn.execute("CREATE TABLE IF NOT EXISTS submissions (id INTEGER PRIMARY KEY, name TEXT, answers TEXT, result1 TEXT, result2 TEXT)")
+    rows = conn.execute("SELECT * FROM submissions ORDER BY id DESC").fetchall()
+    conn.close()
+    return render_template("admin.html", rows=rows)
 
 if __name__ == "__main__":
     import os

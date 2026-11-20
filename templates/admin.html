@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head><title>Admin - CariAdvise</title></head>
+<body style="font-family: sans-serif; padding: 20px;">
+<h1>People Who Did The Quiz: {{ rows|length }}</h1>
+<table border="1" cellpadding="10" style="border-collapse: collapse;">
+<tr><th>ID</th><th>Name</th><th>#1 Career</th><th>#2 Career</th><th>Answers</th></tr>
+{% for r in rows %}
+<tr>
+  <td>{{ r['id'] }}</td>
+  <td>{{ r['name'] }}</td>
+  <td><b>{{ r['result1'] }}</b></td>
+  <td>{{ r['result2'] }}</td>
+  <td>{{ r['answers'] }}</td>
+</tr>
+{% endfor %}
+</table>
+<p><a href="/">Back Home</a></p>
+</body>
+</html>
